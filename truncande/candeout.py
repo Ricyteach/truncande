@@ -36,9 +36,9 @@ def steppify(lines, n_steps) -> List[int]:
     ilinecount: Iterator[Tuple[int, str]] = zip(count(), iter(lines))
     seek_solution_output_results(ilinecount)
 
-    step_line_nos =list()
+    step_line_nos = list()
     try:
-        for x in range(1, n_steps+1):
+        for x in range(1, n_steps + 1):
             n = seek_finite_element_output_for_load_step(ilinecount, x) - 3
             step_line_nos.append(n)
         return step_line_nos
@@ -46,14 +46,14 @@ def steppify(lines, n_steps) -> List[int]:
         raise CandeOutError("error reading load step output") from e
 
 
-def remove_steps(candeout: CandeOut, steps: Tuple[int]=(-1,)) -> None:
+def remove_steps(candeout: CandeOut, steps: Tuple[int] = (-1,)) -> None:
 
     n_steps = candeout.n_steps
 
     keep_steps = list(steps)
     for i, step in enumerate(keep_steps):
-        if step<0:
-            keep_steps[i] = n_steps-step
+        if step < 0:
+            keep_steps[i] = n_steps - step
     keep_steps = set(steps)
 
     step_line_nos = candeout.step_line_nos
@@ -69,7 +69,9 @@ def seek_solution_output_results(ilinecount: Iterator[Tuple[int, str]]) -> int:
     return seek_text("  SOLUTION OUTPUT RESULTS", ilinecount)
 
 
-def seek_finite_element_output_for_load_step(ilinecount: Iterator[Tuple[int, str]], x: int) -> int:
+def seek_finite_element_output_for_load_step(
+    ilinecount: Iterator[Tuple[int, str]], x: int
+) -> int:
     return seek_text(f"  FINITE ELEMENT OUTPUT FOR LOAD STEP {x: >2d}", ilinecount)
 
 
