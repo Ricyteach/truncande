@@ -35,10 +35,11 @@ def test_cande_out(cout, cout_path):
     assert "\n".join(cout.lines) == cout_path.read_text()
 
 
-def test_truncande(patched_main, tmp_file_path, cout_path, cout):
+def test_truncande(tmp_file_path, cout_path, cout):
     runner = CliRunner()
     result = runner.invoke(
-        patched_main, [cout_path, tmp_file_path / "test.txt", "steps", "10"]
+        cli.main, [cout_path, tmp_file_path / "test.txt", "steps", "10", "9"],
+        catch_exceptions=False,
     )
     assert result.exit_code == 0
     assert len(cout.step_line_nos) == 1

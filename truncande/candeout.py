@@ -59,7 +59,7 @@ def remove_steps(candeout: CandeOut, steps: Tuple[int] = (-1,)) -> None:
     step_line_nos = candeout.step_line_nos
     step_line_nos.append(-1)
 
-    for start, stop in zip(step_line_nos[1::-1], step_line_nos[:-1:-1]):
+    for start, stop in zip(step_line_nos[-2::-1], step_line_nos[-1:0:-1]):
         if start in keep_steps:
             continue
         del candeout.lines[start:stop]

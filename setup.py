@@ -4,6 +4,7 @@ setup(
     name="truncande",
     version="0.1",
     packages=["truncande"],
+    install_requires=['click'],
     extras_require=dict(dev=["pytest",]),
     entry_points="""
     [console_scripts]
