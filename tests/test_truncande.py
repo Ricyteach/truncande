@@ -38,7 +38,7 @@ def test_cande_out(cout, cout_path):
 def test_truncande(tmp_file_path, cout_path, cout):
     runner = CliRunner()
     result = runner.invoke(
-        cli.main, [cout_path, tmp_file_path / "test.txt", "steps", "10", "9"],
+        cli.main, [str(cout_path), str(tmp_file_path / "test.txt"), "steps", "10", "9"],
         catch_exceptions=False,
     )
     assert result.exit_code == 0
